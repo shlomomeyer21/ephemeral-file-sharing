@@ -7,5 +7,4 @@ const router = new Router();
 
 router.post('/file', storeFile);
 
-
 export default router.routes();

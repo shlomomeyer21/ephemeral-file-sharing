@@ -11,7 +11,6 @@ handleFileExpiration(subscriber);
 export async function storeFile(ctx: any, next: Next) {
     await multerUploadImage()(ctx, async () => {
         const { file: { filename, path }, request: { body: { ttl } } } = ctx;
-        console.log(ttl);
         await expireFile(publisher, path, ttl);
         ctx.body = { file_url: `http://localhost:3001/${filename}` };
         await next();

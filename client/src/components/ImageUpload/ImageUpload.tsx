@@ -13,12 +13,14 @@ function ImageUpload() {
     const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
     const [fileUrl, setFileUrl] = useState<string>();
     const [image, setImage] = useState<File>()
+    
     const imageFilehandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files !== null && e.target.files.length) {
             const image = e.target.files[0];
             setImage(image);
         }
     }
+
     const sumbit = () => {
         if (image) {
             const formData = new FormData();
@@ -48,8 +50,8 @@ function ImageUpload() {
             <div className='image-input-row'>
                 <label htmlFor='image-upload-file' className='App-button'>
                     Choose image
+                    <input type="file" id="image-upload-file" name="image" accept="image/*" onChange={(e) => imageFilehandler(e)} />
                 </label>
-                <input type="file" id="image-upload-file" name="image" accept="image/*" onChange={(e) => imageFilehandler(e)} />
 
                 <FormControl className='ttl-select'>
                     <InputLabel id="ttl-select-label">TTL</InputLabel>
@@ -73,7 +75,6 @@ function ImageUpload() {
                 </button>
             </div>
 
-
             {image && ttl && <>
                 <hr />
                 <h2>Preview image</h2>
@@ -81,6 +82,7 @@ function ImageUpload() {
                     <img src={URL.createObjectURL(image)} height="300" width="300" alt="golang_meme" />
                 </span></>
             }
+
             {isSuccessModalOpen &&
                 <Modal setIsOpen={setIsSuccessModalOpen}>
                     <p>Here is your <a href={fileUrl}>sharebale link</a>
